@@ -1,0 +1,325 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>失眠嚴重度量表（ISI）</title>
+    <style>
+        * {margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft JhengHei",Arial,sans-serif;}
+        body {background:#f5f7fa;color:#333;line-height:1.7;}
+        .container {max-width:600px;margin:0 auto;background:#fff;min-height:100vh;padding:20px;}
+        .producer {text-align:right;color:#5a6b87;font-size:18px;margin-bottom:10px;}
+        h1 {text-align:center;color:#2d6bc8;font-size:24px;margin:20px 0;padding-bottom:10px;border-bottom:2px solid #e8f0fe;}
+        /* 介绍卡片 */
+        .intro-card {background:#fff;border:1px solid #e8f0fe;border-radius:12px;padding:15px;margin:20px 0;display:flex;align-items:flex-start;}
+        .intro-icon {width:24px;height:24px;background:#e8f0fe;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#3a7bd5;margin-right:10px;flex-shrink:0;}
+        .intro-text {font-size:15px;color:#666;}
+        /* 题目卡片 */
+        .question-card {background:#fff;border:1px solid #e8f0fe;border-radius:12px;padding:15px;margin:20px 0;}
+        .question-card h3 {color:#333;font-size:17px;margin-bottom:15px;}
+        .question-card h3 span {display:inline-block;width:20px;height:20px;background:#e8f0fe;border-radius:50%;color:#3a7bd5;text-align:center;line-height:20px;font-size:14px;margin-right:8px;}
+        .sub-question {font-size:16px;color:#333;margin:10px 0;font-weight:500;}
+        /* 选项样式 */
+        .option {display:flex;align-items:center;background:#f8fafc;border:1px solid #e1e6f0;border-radius:10px;padding:12px;margin:8px 0;cursor:pointer;transition:all 0.2s;}
+        .option:hover {background:#e8f0fe;}
+        .option.selected {background:#e8f0fe;border-color:#3a7bd5;}
+        .option input[type="radio"] {width:18px;height:18px;accent-color:#3a7bd5;margin-right:12px;}
+        .option-text {font-size:15px;color:#333;flex:1;}
+        /* 底部固定栏 */
+        .bottom-fixed {position:fixed;bottom:0;left:0;width:100%;background:#fff;padding:15px 20px;box-shadow:0 -2px 10px rgba(0,0,0,0.05);display:flex;justify-content:space-between;align-items:center;max-width:600px;margin:0 auto;}
+        .current-score {font-size:16px;font-weight:700;color:#3a7bd5;}
+        .result-btn {background:#3a7bd5;color:#fff;border:none;padding:12px 40px;border-radius:25px;font-size:16px;cursor:pointer;display:flex;align-items:center;}
+        .result-btn i {margin-right:8px;}
+        /* 结果弹窗 */
+        .result-modal {position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:none;justify-content:center;align-items:center;padding:20px;z-index:999;}
+        .result-card {background:#fff;border-radius:16px;padding:30px;width:100%;max-width:500px;text-align:center;}
+        .result-card h2 {color:#333;margin-bottom:10px;font-size:22px;}
+        .result-card .subtitle {color:#666;font-size:14px;margin-bottom:30px;}
+        .score-box {background:#f8fafc;border-radius:12px;padding:20px;margin:20px 0;}
+        .score-title {color:#3a7bd5;font-size:16px;margin-bottom:10px;}
+        .total-score {font-size:48px;font-weight:700;color:#ef6c00;margin:10px 0;}
+        .score-range {color:#666;font-size:15px;}
+        .result-desc {background:#f8fafc;padding:15px;border-radius:10px;margin:20px 0;text-align:left;line-height:1.8;}
+        .result-desc .title {color:#ef6c00;font-weight:600;margin-bottom:8px;display:flex;align-items:center;}
+        .result-desc .title i {margin-right:6px;}
+        .close-btn {background:#3a7bd5;color:#fff;border:none;padding:12px 30px;border-radius:8px;font-size:16px;cursor:pointer;margin-top:20px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="producer">Produced by Ye yiu sum Lukey</div>
+        <h1>失眠嚴重度量表（ISI）</h1>
+
+        <!-- 介绍卡片 -->
+        <div class="intro-card">
+            <div class="intro-icon">ℹ️</div>
+            <div class="intro-text">
+                本問卷為失眠篩檢問卷，總共7項問題，皆與睡眠質量有關。完成後您可以了解自己的失眠嚴重程度。
+            </div>
+        </div>
+
+        <!-- 第1题 -->
+        <div class="question-card">
+            <h3><span>1</span>請評估近兩週內失眠問題的嚴重程度</h3>
+            <div class="sub-question">a. 入睡困難</div>
+            <div class="option" data-score="0">
+                <input type="radio" name="q1a" value="0">
+                <div class="option-text">完全不會（30分鐘以內）</div>
+            </div>
+            <div class="option" data-score="1">
+                <input type="radio" name="q1a" value="1">
+                <div class="option-text">輕度（30分鐘以上）</div>
+            </div>
+            <div class="option" data-score="2">
+                <input type="radio" name="q1a" value="2">
+                <div class="option-text">中度（1小時以上）</div>
+            </div>
+            <div class="option" data-score="3">
+                <input type="radio" name="q1a" value="3">
+                <div class="option-text">重度（2小時以上）</div>
+            </div>
+            <div class="option" data-score="4">
+                <input type="radio" name="q1a" value="4">
+                <div class="option-text">非常嚴重（3小時以上）</div>
+            </div>
+
+            <div class="sub-question">b. 無法維持較長時間的睡眠</div>
+            <div class="option" data-score="0">
+                <input type="radio" name="q1b" value="0">
+                <div class="option-text">完全不會</div>
+            </div>
+            <div class="option" data-score="1">
+                <input type="radio" name="q1b" value="1">
+                <div class="option-text">甚少</div>
+            </div>
+            <div class="option" data-score="2">
+                <input type="radio" name="q1b" value="2">
+                <div class="option-text">有時</div>
+            </div>
+            <div class="option" data-score="3">
+                <input type="radio" name="q1b" value="3">
+                <div class="option-text">經常</div>
+            </div>
+            <div class="option" data-score="4">
+                <input type="radio" name="q1b" value="4">
+                <div class="option-text">幾乎每天</div>
+            </div>
+
+            <div class="sub-question">c. 太早醒</div>
+            <div class="option" data-score="0">
+                <input type="radio" name="q1c" value="0">
+                <div class="option-text">完全不會</div>
+            </div>
+            <div class="option" data-score="1">
+                <input type="radio" name="q1c" value="1">
+                <div class="option-text">甚少</div>
+            </div>
+            <div class="option" data-score="2">
+                <input type="radio" name="q1c" value="2">
+                <div class="option-text">有時</div>
+            </div>
+            <div class="option" data-score="3">
+                <input type="radio" name="q1c" value="3">
+                <div class="option-text">經常</div>
+            </div>
+            <div class="option" data-score="4">
+                <input type="radio" name="q1c" value="4">
+                <div class="option-text">幾乎每天</div>
+            </div>
+        </div>
+
+        <!-- 第2题 -->
+        <div class="question-card">
+            <h3><span>2</span>您滿意自己最近的睡眠狀態嗎？</h3>
+            <div class="option" data-score="0">
+                <input type="radio" name="q2" value="0">
+                <div class="option-text">非常滿意</div>
+            </div>
+            <div class="option" data-score="1">
+                <input type="radio" name="q2" value="1">
+                <div class="option-text">滿意</div>
+            </div>
+            <div class="option" data-score="2">
+                <input type="radio" name="q2" value="2">
+                <div class="option-text">中等</div>
+            </div>
+            <div class="option" data-score="3">
+                <input type="radio" name="q2" value="3">
+                <div class="option-text">不滿意</div>
+            </div>
+            <div class="option" data-score="4">
+                <input type="radio" name="q2" value="4">
+                <div class="option-text">非常不滿意</div>
+            </div>
+        </div>
+
+        <!-- 第3题 -->
+        <div class="question-card">
+            <h3><span>3</span>睡眠問題是否有干擾到您的日常生活？</h3>
+            <div class="intro-text" style="margin:10px 0;padding-left:0;">（如：工作表現、日常瑣事、專注力、記憶力、情緒等。）</div>
+            <div class="option" data-score="0">
+                <input type="radio" name="q3" value="0">
+                <div class="option-text">完全無干擾</div>
+            </div>
+            <div class="option" data-score="1">
+                <input type="radio" name="q3" value="1">
+                <div class="option-text">一點點干擾</div>
+            </div>
+            <div class="option" data-score="2">
+                <input type="radio" name="q3" value="2">
+                <div class="option-text">有些干擾</div>
+            </div>
+            <div class="option" data-score="3">
+                <input type="radio" name="q3" value="3">
+                <div class="option-text">很多干擾</div>
+            </div>
+            <div class="option" data-score="4">
+                <input type="radio" name="q3" value="4">
+                <div class="option-text">非常多干擾</div>
+            </div>
+        </div>
+
+        <!-- 第4题 -->
+        <div class="question-card">
+            <h3><span>4</span>他人是否有注意到您的生活品質因睡眠問題受到影響？</h3>
+            <div class="option" data-score="0">
+                <input type="radio" name="q4" value="0">
+                <div class="option-text">完全沒注意</div>
+            </div>
+            <div class="option" data-score="1">
+                <input type="radio" name="q4" value="1">
+                <div class="option-text">一點點注意</div>
+            </div>
+            <div class="option" data-score="2">
+                <input type="radio" name="q4" value="2">
+                <div class="option-text">有些注意</div>
+            </div>
+            <div class="option" data-score="3">
+                <input type="radio" name="q4" value="3">
+                <div class="option-text">很多注意</div>
+            </div>
+            <div class="option" data-score="4">
+                <input type="radio" name="q4" value="4">
+                <div class="option-text">非常注意</div>
+            </div>
+        </div>
+
+        <!-- 第5题 -->
+        <div class="question-card">
+            <h3><span>5</span>最近的睡眠問題是否令您擔心或困擾？</h3>
+            <div class="option" data-score="0">
+                <input type="radio" name="q5" value="0">
+                <div class="option-text">完全不擔心</div>
+            </div>
+            <div class="option" data-score="1">
+                <input type="radio" name="q5" value="1">
+                <div class="option-text">一點點擔心</div>
+            </div>
+            <div class="option" data-score="2">
+                <input type="radio" name="q5" value="2">
+                <div class="option-text">有些擔心</div>
+            </div>
+            <div class="option" data-score="3">
+                <input type="radio" name="q5" value="3">
+                <div class="option-text">很多擔心</div>
+            </div>
+            <div class="option" data-score="4">
+                <input type="radio" name="q5" value="4">
+                <div class="option-text">非常擔心</div>
+            </div>
+        </div>
+
+        <!-- 底部固定栏 -->
+        <div class="bottom-fixed">
+            <div class="current-score">當前得分：<span id="currentScore">0</span></div>
+            <button class="result-btn" onclick="showResult()"><i>📊</i>查看結果</button>
+        </div>
+    </div>
+
+    <!-- 结果弹窗 -->
+    <div class="result-modal" id="resultModal">
+        <div class="result-card">
+            <h2>評估結果</h2>
+            <div class="subtitle">失眠嚴重度量表（ISI）分析報告</div>
+            <div class="score-box">
+                <div class="score-title">您的總得分</div>
+                <div class="total-score" id="finalScore">0</div>
+                <div class="score-range" id="scoreRange"></div>
+            </div>
+            <div class="result-desc">
+                <div class="title"><i>📝</i>結果解讀</div>
+                <div id="resultDesc"></div>
+            </div>
+            <button class="close-btn" onclick="closeModal()">關閉</button>
+        </div>
+    </div>
+
+    <script>
+        // 初始化变量
+        let totalScore = 0;
+        const options = document.querySelectorAll('.option');
+        const currentScoreEl = document.getElementById('currentScore');
+        const resultModal = document.getElementById('resultModal');
+        const finalScoreEl = document.getElementById('finalScore');
+        const scoreRangeEl = document.getElementById('scoreRange');
+        const resultDescEl = document.getElementById('resultDesc');
+
+        // 选项点击事件
+        options.forEach(option => {
+            option.addEventListener('click', function() {
+                // 清除当前题组的选中状态
+                const name = this.querySelector('input').name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(input => {
+                    input.parentElement.classList.remove('selected');
+                });
+                // 选中当前选项
+                this.classList.add('selected');
+                // 更新总分
+                calculateTotal();
+            });
+        });
+
+        // 计算总分
+        function calculateTotal() {
+            totalScore = 0;
+            document.querySelectorAll('input[type="radio"]:checked').forEach(input => {
+                totalScore += parseInt(input.parentElement.dataset.score);
+            });
+            currentScoreEl.textContent = totalScore;
+        }
+
+        // 显示结果
+        function showResult() {
+            calculateTotal();
+            finalScoreEl.textContent = totalScore;
+            let range, desc;
+            if (totalScore >= 0 && totalScore <= 7) {
+                range = '0-7分';
+                desc = '無明顯失眠困擾<br>您的睡眠狀況良好，無明顯失眠問題，建議維持規律作息即可。';
+                finalScoreEl.style.color = '#2e7d32';
+            } else if (totalScore >= 8 && totalScore <= 21) {
+                range = '8-21分';
+                desc = '有明顯失眠困擾<br>您的失眠症狀較為明顯，已經對日常生活造成一定影響，建議調整睡眠習慣，若症狀持續可尋求社工協助。';
+                finalScoreEl.style.color = '#ef6c00';
+            } else if (totalScore >= 22 && totalScore <= 28) {
+                range = '22-28分';
+                desc = '有明顯失眠傾向，建議尋求社工專業協助<br>您的失眠症狀嚴重，已顯著影響日常生活與情緒，建議立即尋求社工或醫療專業人員的協助。';
+                finalScoreEl.style.color = '#c62828';
+            }
+            scoreRangeEl.textContent = range;
+            resultDescEl.innerHTML = desc;
+            resultModal.style.display = 'flex';
+        }
+
+        // 关闭弹窗
+        function closeModal() {
+            resultModal.style.display = 'none';
+        }
+
+        // 点击弹窗外部关闭
+        resultModal.addEventListener('click', function(e) {
+            if (e.target === resultModal) closeModal();
+        });
+    </script>
+</body>
+</html>
