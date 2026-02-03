@@ -156,10 +156,10 @@ export default function ISIScale() {
     onChange: () => void
   }) => (
     <label
-      className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-colors mb-2 ${
+      className={`flex items-center gap-4 px-4 py-4 rounded-xl border cursor-pointer transition-all mb-3 ${
         checked
-          ? "bg-blue-50 border-blue-500"
-          : "bg-slate-50 border-slate-200 hover:bg-blue-50"
+          ? "bg-blue-50 border-blue-400 shadow-sm"
+          : "bg-gray-50 border-gray-200 hover:bg-gray-100"
       }`}
     >
       <input
@@ -168,33 +168,33 @@ export default function ISIScale() {
         value={value}
         checked={checked}
         onChange={onChange}
-        className="w-4 h-4 text-blue-600 accent-blue-600"
+        className="w-5 h-5 text-blue-600 accent-blue-600"
       />
-      <span className="text-sm text-slate-700">{text}</span>
+      <span className="text-base text-gray-700">{text}</span>
     </label>
   )
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <div className="mx-auto max-w-2xl bg-white min-h-screen pb-24">
-        <div className="p-5">
-          <p className="text-right text-slate-500 text-lg mb-2">
+    <div className="min-h-screen bg-gray-100">
+      <div className="mx-auto max-w-3xl bg-white min-h-screen pb-28 shadow-sm">
+        <div className="px-6 py-8">
+          <p className="text-right text-gray-500 text-base mb-4">
             Produced by Ye yiu sum Lukey
           </p>
 
-          <h1 className="text-center text-2xl font-bold text-blue-600 py-5 border-b-2 border-blue-100">
+          <h1 className="text-center text-3xl font-bold text-blue-500 mb-8">
             失眠嚴重度量表（ISI）
           </h1>
 
           {/* Intro Card */}
-          <div className="mt-5 border border-blue-100 rounded-lg p-4">
-            <div className="flex items-start gap-3">
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-100">
-                <svg className="h-4 w-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <div className="border border-gray-200 rounded-xl p-5 bg-white">
+            <div className="flex items-start gap-4">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100">
+                <svg className="h-5 w-5 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
                 </svg>
               </div>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-base text-gray-600 leading-relaxed pt-1">
                 本問卷為失眠篩檢問卷，總共7項問題，皆與睡眠質量有關。完成後您可以了解自己的失眠嚴重程度。
               </p>
             </div>
@@ -202,25 +202,25 @@ export default function ISIScale() {
 
           {/* Questions */}
           {questions.map((question) => (
-            <div key={question.id} className="mt-5 border border-blue-100 rounded-lg">
-              <div className="p-4 pb-2">
-                <div className="text-base font-semibold flex items-start gap-2">
-                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600 text-sm">
+            <div key={question.id} className="mt-6 border border-gray-200 rounded-xl bg-white">
+              <div className="p-5 pb-3">
+                <div className="text-lg font-semibold flex items-start gap-3">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-700 text-base font-bold">
                     {question.id}
                   </span>
-                  <span>{question.title}</span>
+                  <span className="text-gray-800 pt-0.5">{question.title}</span>
                 </div>
                 {question.description && (
-                  <p className="text-sm text-slate-500 ml-7 mt-1">
+                  <p className="text-sm text-gray-500 ml-10 mt-1">
                     {question.description}
                   </p>
                 )}
               </div>
-              <div className="p-4 pt-2">
+              <div className="px-5 pb-5">
                 {question.subQuestions ? (
                   question.subQuestions.map((subQ) => (
-                    <div key={subQ.id} className="mb-4">
-                      <p className="font-medium text-slate-700 mb-3">
+                    <div key={subQ.id} className="mb-6 last:mb-0">
+                      <p className="font-semibold text-gray-700 mb-4 text-base">
                         {subQ.label}
                       </p>
                       <div>
@@ -257,17 +257,17 @@ export default function ISIScale() {
         </div>
 
         {/* Bottom Fixed Bar */}
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg p-4">
-          <div className="mx-auto max-w-2xl flex items-center justify-between">
-            <p className="font-bold text-blue-600">
-              當前得分：<span className="text-xl">{totalScore}</span>
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg py-4 px-6">
+          <div className="mx-auto max-w-3xl flex items-center justify-between">
+            <p className="font-bold text-blue-500 text-lg">
+              當前得分：{totalScore}
             </p>
             <button
               onClick={() => setShowResult(true)}
-              className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-8 py-2 flex items-center gap-2 transition-colors"
+              className="bg-gradient-to-r from-green-500 to-red-500 hover:from-green-600 hover:to-red-600 text-white rounded-full px-8 py-3 flex items-center gap-3 transition-all shadow-md text-base font-medium"
             >
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M5 9.2h3V19H5V9.2zM10.6 5h2.8v14h-2.8V5zm5.6 8H19v6h-2.8v-6z" />
               </svg>
               查看結果
             </button>
